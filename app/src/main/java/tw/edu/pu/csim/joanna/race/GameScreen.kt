@@ -5,13 +5,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun GameScreen(message: String,gameViewModel: GameViewModel) {
@@ -38,15 +41,26 @@ fun GameScreen(message: String,gameViewModel: GameViewModel) {
             )
         }
 
+        Text(
+            text = "分數：${gameViewModel.score}",
+            color = Color.Black,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(16.dp)
+        )
 
         Text(
             text = message + gameViewModel.screenWidthPx.toString() + "*"
                     + gameViewModel.screenHeightPx.toString()
         )
 
+
         Button(onClick = {
-            gameViewModel.gameRunning = true
-            gameViewModel.StartGame()
+            if (!gameViewModel.gameRunning) {
+                gameViewModel.gameRunning = true
+                gameViewModel.StartGame()
+
+            }
         }
         ) {
             Text("遊戲開始")
