@@ -1,7 +1,9 @@
 package tw.edu.pu.csim.joanna.race
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -36,7 +38,6 @@ class GameViewModel: ViewModel() {
     //val horses = Horse()
 
 
-
     fun StartGame() {
         //回到初使位置
         circleX = 100f
@@ -53,7 +54,8 @@ class GameViewModel: ViewModel() {
                 for (i in 0..2){
                     horses[i].HorseRun()
                     if (horses[i].horseX >= screenWidthPx - 200){
-                        horses[i].horseX = 0
+                        for (i in 0..2){
+                        horses[i].horseX = 0}
                     }
                 }
             }

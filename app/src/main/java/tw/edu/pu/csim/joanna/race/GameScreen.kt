@@ -105,7 +105,14 @@ fun GameScreen(message: String,gameViewModel: GameViewModel) {
                 ) {
                     Text("遊戲開始")
                 }
-
+                var user by remember { mutableStateOf("1") }
+                TextField(
+                    value = user,
+                    onValueChange = {user = it},
+                    label = {Text("賽馬")},
+                    placeholder = {Text("猜猜哪匹馬獲勝？")}
+                )
+                Text("您預測獲勝的馬是：$user")
             }
         }
     }
