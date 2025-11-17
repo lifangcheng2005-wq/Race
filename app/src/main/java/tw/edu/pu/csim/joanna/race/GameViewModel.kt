@@ -24,18 +24,23 @@ class GameViewModel: ViewModel() {
 
     var score by mutableStateOf(0)
 
+    val horses = mutableListOf<Horse>()
     // 設定螢幕寬度與高度
     fun SetGameSize(w: Float, h: Float) {
         screenWidthPx = w
         screenHeightPx = h
+        for (i in 0..2){
+            horses.add(Horse(i))
+        }
     }
+    //val horses = Horse()
+
+
 
     fun StartGame() {
         //回到初使位置
         circleX = 100f
         circleY = screenHeightPx - 100f
-        score = 0
-
         viewModelScope.launch {
             while (gameRunning) { // 每0.1秒循環
                 delay(100)
@@ -45,6 +50,12 @@ class GameViewModel: ViewModel() {
                     circleX = 100f
                     score += 1
                 }
+                for (i in 0..2){
+                    horses[i].HorseRun()
+                    if (horses[i].horseX >= screenWidthPx - 200){
+                        horses[i].horseX = 0
+                    }
+                }
             }
         }
     }
@@ -52,6 +63,4 @@ class GameViewModel: ViewModel() {
         circleX += x
         circleY += y
     }
-
-
 }
